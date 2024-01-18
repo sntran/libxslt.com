@@ -2,8 +2,7 @@ COSMO_VERSION=3.2.4
 LIBXML_VERSION=2.12.3
 LIBXSLT_VERSION=1.1.39
 
-PWD=$(dir $(realpath $(lastword $(MAKEFILE_LIST))))
-COSMO=$(PWD)cosmocc
+COSMO=$(abspath cosmocc)
 CC=$(COSMO)/bin/cosmocc -I$(COSMO)/include -L$(COSMO)/lib
 CXX=$(COSMO)/bin/cosmoc++ -I$(COSMO)/include -L$(COSMO)/lib
 PKG_CONFIG=pkg-config --with-path=$(COSMO)/lib/pkgconfig
@@ -17,10 +16,10 @@ LIBXML_URL=https://download.gnome.org/sources/libxml2/$(call split-dot,$(LIBXML_
 LIBXSLT_URL=https://download.gnome.org/sources/libxslt/$(call split-dot,$(LIBXSLT_VERSION),1).$(call split-dot,$(LIBXSLT_VERSION),2)/libxslt-$(LIBXSLT_VERSION).tar.xz
 
 .PHONY: all
-all: cosmocc xmlcatalog.com xmllint.com xsltproc.com
+all: $(COSMO) xmlcatalog.com xmllint.com xsltproc.com
 	file $^
 
-cosmocc:
+$(COSMO):
 	mkdir -p $@
 	cd $@ && curl -L https://cosmo.zip/pub/cosmocc/cosmocc-$(COSMO_VERSION).zip -o cosmocc-$(COSMO_VERSION).zip && unzip cosmocc-$(COSMO_VERSION).zip
 
@@ -52,4 +51,4 @@ libxslt:
 	mv libxslt-* $@
 
 clean:
-	rm -rf libxslt libxml2 xmlcatalog.com xmllint.com xsltproc.com
+	rm -rf $(COSMO) libxslt libxml2 xmlcatalog.com xmllint.com xsltproc.com

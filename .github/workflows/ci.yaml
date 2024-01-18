@@ -12,8 +12,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
 
-      - run: make cosmocc
-      - run: make PWD=${{ github.workspace }}/
+      - run: make
 
       - name: Upload xmlcatalog.com
         uses: actions/upload-artifact@v4

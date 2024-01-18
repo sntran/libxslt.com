@@ -1,0 +1,34 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - run: make
+
+      - name: Upload xmlcatalog.com
+        uses: actions/upload-artifact@v4
+        with:
+          name: xmlcatalog.com
+          path: xmlcatalog.com
+          compression-level: 0
+      - name: Upload xmllint.com
+        uses: actions/upload-artifact@v4
+        with:
+          name: xmllint.com
+          path: xmllint.com
+          compression-level: 0
+      - name: Upload xsltproc.com
+        uses: actions/upload-artifact@v4
+        with:
+          name: xsltproc.com
+          path: xsltproc.com
+          compression-level: 0

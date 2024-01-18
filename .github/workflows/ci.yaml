@@ -12,7 +12,9 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
 
-      - run: make
+      - run: make cosmocc
+      - run: make libxml2 libxslt
+      - run: make xmlcatalog.com xmllint.com xsltproc.com
 
       - name: Upload xmlcatalog.com
         uses: actions/upload-artifact@v4

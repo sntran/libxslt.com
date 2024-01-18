@@ -1,7 +1,8 @@
+COSMO_VERSION=3.2.4
 LIBXML_VERSION=2.12.3
 LIBXSLT_VERSION=1.1.39
 
-COSMO=$(abspath cosmocc)
+COSMO=$(abspath ./cosmocc)
 CC=$(COSMO)/bin/cosmocc -I$(COSMO)/include -L$(COSMO)/lib
 CXX=$(COSMO)/bin/cosmoc++ -I$(COSMO)/include -L$(COSMO)/lib
 PKG_CONFIG=pkg-config --with-path=$(COSMO)/lib/pkgconfig
@@ -20,7 +21,7 @@ all: cosmocc xmlcatalog.com xmllint.com xsltproc.com
 
 cosmocc:
 	mkdir -p $@
-	cd $@ && wget https://cosmo.zip/pub/cosmocc/cosmocc-3.2.4.zip && unzip cosmocc-3.2.4.zip
+	cd $@ && curl -L https://cosmo.zip/pub/cosmocc/cosmocc-$(COSMO_VERSION).zip -o cosmocc-$(COSMO_VERSION).zip && unzip cosmocc-$(COSMO_VERSION).zip
 
 .SECONDEXPANSION:
 xmlcatalog.com xmllint.com: libxml2/$$(subst .com,,$$@)

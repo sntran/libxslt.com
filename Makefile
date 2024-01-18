@@ -2,7 +2,8 @@ COSMO_VERSION=3.2.4
 LIBXML_VERSION=2.12.3
 LIBXSLT_VERSION=1.1.39
 
-COSMO=$(dir $(abspath $(firstword $(MAKEFILE_LIST))))cosmocc
+PWD=$(dir $(realpath $(lastword $(MAKEFILE_LIST))))
+COSMO=$(PWD)cosmocc
 CC=$(COSMO)/bin/cosmocc -I$(COSMO)/include -L$(COSMO)/lib
 CXX=$(COSMO)/bin/cosmoc++ -I$(COSMO)/include -L$(COSMO)/lib
 PKG_CONFIG=pkg-config --with-path=$(COSMO)/lib/pkgconfig

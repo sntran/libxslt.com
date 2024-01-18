@@ -13,8 +13,7 @@ jobs:
         uses: actions/checkout@v3
 
       - run: make cosmocc
-      - run: make libxml2 libxslt
-      - run: make xmlcatalog.com xmllint.com xsltproc.com
+      - run: make PWD=${{ github.workspace }}/
 
       - name: Upload xmlcatalog.com
         uses: actions/upload-artifact@v4
